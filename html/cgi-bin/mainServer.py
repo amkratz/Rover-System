@@ -9,7 +9,7 @@ import pickle
 # joystick input.
 
 driveTrain = drivetrain.DriveTrain()
-driveTrain.setTurnSpeedDivisor(2)
+driveTrain.setTurnSpeedDivisor(2.5)
 driveTrain.setLongitudinalSpeedDivisor(2)
 
 # Create a TCP/IP socket
@@ -18,7 +18,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
 
-server_address = ('192.168.1.182', 10000)
+server_address = ('192.168.0.27', 10003)
 sock.bind(server_address)
 
 # Listen for incoming connections
@@ -31,13 +31,13 @@ while True:
 
     (connection, client_address) = sock.accept()
 
-    # Receive data in 4096 byte chunks
+    # Receive data as a read only file
 
     while True:
-        data = connection.recv(128)
+        data = connection.makefile("r")
 
         if data:
-            data = pickle.loads(data)
+            data = pickle.load(data)
             print('Data: ' + str(data))
             x = float(data[0])
             y = float(data[1])
