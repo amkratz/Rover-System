@@ -1,0 +1,67 @@
+<html>
+
+<head>
+
+</head>
+
+<style>
+    body {
+        background-color: #ff9900
+    }
+    
+    h1,
+    p {
+        color: #0047b3
+    }
+    
+    button {
+        color: #0047b3;
+        background: #767e89;
+        border: 1px solid #000;
+        border-radius: 8px;
+        position: center;
+    }
+</style>
+
+<body>
+	
+
+    <div>
+        <iframe src="http://192.168.1.182:8081" frameborder="0" align="left" width="640" height="480" align="left" scrolling="no" style="padding:20px"></iframe>
+    </div>
+
+    <div style="text-align:center">
+
+        <h1> Challenger Mars Rover Control Test Page</h1>
+        <p><img style="height: 100px" src="2Challenger-Space-Center.png"></p>
+        <br>
+        <br>
+
+        <span style="display:inline-block;padding:5px;border:1px solid #ff0066; font-size: 140%;font-weight: bold;">
+
+				<br>
+				<button style="height: 75px; width: 75px" onclick="forward()"><img style="height: 65px"src="forward.png"></button>
+				<br><br><br><br>
+				<img hspace="10" style="padding-left: 5px">
+				<button style="height: 75px; width: 75px" onclick="left()"><img style="height: 65px"src="left.png"></button>
+				<img hspace="20" style="padding-left: 10px">
+				<button style="height: 75px; width: 75px" onclick="stop()"><img style="height: 63px"src="stop.png"></button>
+				<img hspace="20" style="padding-left: 10px">
+				<button style="height: 75px; width: 75px" onclick="right()"><img style="height: 65px"src="right.png"></button>
+				<img hspace="10" style="padding-left: 5px">
+				<br><br><br><br>
+				<button style="height: 75px; width: 75px" onclick="reverse()"><img style="height: 65px"src="reverse.png"></button>
+                <br><br><br><br>
+                <button style="height: 75px; width: 75px" onclick="finishedATMO()"><img style="height: 65px"src="finished.png"></button>
+                <button style="height: 75px; width: 75px" onclick="finishedGMO()"><img style="height: 65px"src="finished.png"></button>
+                <h3>Finished ATMO    Finished GMO</h3>
+
+
+				<br><br>
+			</span>
+
+    </div>
+    <script type="text/javascript" src="buttonFunctions.js"></script>
+</body>
+
+</html>
