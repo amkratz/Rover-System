@@ -34,7 +34,7 @@ while True:
     # Receive data in 4096 byte chunks
 
     while True:
-        data = connection.recv(4096)
+        data = connection.recv(128)
 
         if data:
             data = pickle.loads(data)
