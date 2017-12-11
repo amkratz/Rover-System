@@ -1,43 +1,36 @@
 import drivetrain
 import time
-import socket
 import sys
-import pickle
+from multiprocessing.connection import Listener
 
 # A prototype of the Mars Rover main module
 # which contains an infinite loop to process
 # joystick input.
 
 driveTrain = drivetrain.DriveTrain()
-driveTrain.setTurnSpeedDivisor(2.5)
+driveTrain.setTurnSpeedDivisor(2)
 driveTrain.setLongitudinalSpeedDivisor(2)
 
-# Create a TCP/IP socket
+# Sets up the server listener to await client connection
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+IP_ADDRESS = 'localhost'
+PORT = 10003
 
-# Bind the socket to the port
+serverSocket = Listener((IP_ADDRESS, PORT))
 
-server_address = ('192.168.0.27', 10003)
-sock.bind(server_address)
-
-# Listen for incoming connections
-
-sock.listen(1)
 
 while True:
 
     # Wait for a connection
 
-    (connection, client_address) = sock.accept()
+    connection = serverSock.accept()
 
-    # Receive data as a read only file
+    # Receive data in 1024 byte chunks
 
     while True:
-        data = connection.makefile("r")
+        data = connection.recv()
 
         if data:
-            data = pickle.load(data)
             print('Data: ' + str(data))
             x = float(data[0])
             y = float(data[1])
@@ -65,4 +58,4 @@ driveTrain.stop()
 connection.close()
 
 
-			
+            

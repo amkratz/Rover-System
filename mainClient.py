@@ -1,19 +1,15 @@
 import joystick
-import socket
 import sys
 import time
-import pickle
+from multiprocessing.connection import Client
 
 # Mars Rover main client module
 # Sets up a joystick and sends input
 # over internet to rover unit
 
-# Create a TCP/IP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# Sets up client to connect with the server
 
-# Connect the socket to the port where the server is listening
-server_address = ('192.168.0.27', 10003)
-sock.connect(server_address)
+client = Client(('192.168.0.27', 10003))
 
 # Initialize joystick
 joystick = joystick.Joystick()
@@ -28,9 +24,8 @@ while not joystick.isButtonPressed(10):
     x, y, z = joystick.getAxes()
     data = [x,y,z]
     print("" + str(data)) #Test
-    dataSend = pickle.dumps(data)
-
-    sock.sendall(dataSend)
+    
+    client.send(data)
     time.sleep(0.1) # Set to .1 seconds to send data only every 100 ms to keep from exceeding wifi capabilities
 
 # Close socket and notify user and server of stoppage
@@ -39,6 +34,5 @@ x = 2
 y = 2
 z = 2
 data = [x,y,z]
-dataSend = pickle.dumps(data)
-sock.sendall(dataSend)
-sock.close()
+client.send(data)
+client.close()
